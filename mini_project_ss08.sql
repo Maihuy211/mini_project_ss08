@@ -92,5 +92,5 @@ select r.room_type, count(*) as total_bookings_most
 from bookings b
 join rooms r on b.room_id = r.room_id
 group by r.room_type
-order by total_bookings desc
+order by total_bookings_most desc
 limit 1;
