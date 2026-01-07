@@ -75,20 +75,20 @@ from bookings b
 join guests g on b.guest_id = g.guest_id
 join rooms r on b.room_id = r.room_id;
 -- Cho biết mỗi khách đã đặt phòng bao nhiêu lần
-select g.guest_name , count(b.guest_id)
+select g.guest_name , count(b.guest_id) as number_booking
 from bookings b 
 join guests g on b.guest_id = g.guest_id
-group by b.guest_id;
+group by g.guest_id;
 -- Tính doanh thu của mỗi phòng, với công thức: “Doanh thu = số ngày ở × giá thuê theo ngày”
 -- Hiển thị tổng doanh thu của từng loại phòng
 -- Tìm những khách đã đặt phòng từ 2 lần trở lên
-select g.guest_name , count(b.booking_id)
+select g.guest_name , count(b.booking_id) as number_booking
 from bookings b 
 join guests g on b.guest_id = g.guest_id
 group by b.guest_id
 having count(b.booking_id) >= 2;
 -- Tìm loại phòng có số lượt đặt phòng nhiều nhất
-select r.room_type, count(*) as total_bookings
+select r.room_type, count(*) as total_bookings_most
 from bookings b
 join rooms r on b.room_id = r.room_id
 group by r.room_type
