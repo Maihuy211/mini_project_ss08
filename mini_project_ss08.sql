@@ -1,6 +1,11 @@
 CREATE DATABASE mini_project_ss08;
 USE mini_project_ss08;
 
+-- Xóa bảng nếu đã tồn tại (để chạy lại nhiều lần)
+DROP TABLE IF EXISTS bookings;
+DROP TABLE IF EXISTS rooms;
+DROP TABLE IF EXISTS guests;
+
 -- Bảng khách hàng
 CREATE TABLE guests (
     guest_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -78,14 +83,14 @@ join rooms r on b.room_id = r.room_id;
 select g.guest_name , count(b.guest_id) as number_booking
 from bookings b 
 join guests g on b.guest_id = g.guest_id
-group by g.guest_id;
+group by g.guest_name;
 -- Tính doanh thu của mỗi phòng, với công thức: “Doanh thu = số ngày ở × giá thuê theo ngày”
 -- Hiển thị tổng doanh thu của từng loại phòng
 -- Tìm những khách đã đặt phòng từ 2 lần trở lên
 select g.guest_name , count(b.booking_id) as number_booking
 from bookings b 
 join guests g on b.guest_id = g.guest_id
-group by g.guest_id
+group by g.guest_name
 having count(b.booking_id) >= 2;
 -- Tìm loại phòng có số lượt đặt phòng nhiều nhất
 select r.room_type, count(*) as total_bookings_most
@@ -94,3 +99,5 @@ join rooms r on b.room_id = r.room_id
 group by r.room_type
 order by total_bookings_most desc
 limit 1;
+
+
