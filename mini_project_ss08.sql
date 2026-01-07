@@ -85,7 +85,7 @@ group by g.guest_id;
 select g.guest_name , count(b.booking_id) as number_booking
 from bookings b 
 join guests g on b.guest_id = g.guest_id
-group by b.guest_id
+group by g.guest_id
 having count(b.booking_id) >= 2;
 -- Tìm loại phòng có số lượt đặt phòng nhiều nhất
 select r.room_type, count(*) as total_bookings_most
